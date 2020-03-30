@@ -13,3 +13,73 @@
     ->yarn add prettier eslint-config-prettier eslint-plugin-prettier babel-eslint -D
   ->Configurar arquivo '.eslintrc.js'
   ->Criar arquivo '.prettierrc' e configurar
+
+--CONFIGURAR ROOT IMPORT
+  -yarn add babel-plugin-root-import eslint-import-resolver-babel-plugin-root-import -D
+    ->Configurar 'babel.config.js'
+    ->Criar arquivo 'jsconfig.json' e configurar
+
+--CONFIGURAR ROTAS
+  ->Instalar e configurar React Navigation (ver documentação 'React Navigation')
+    ->yarn add @react-navigation/native
+    ->yarn add react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view
+  ->Criar arquivo 'routes.js'
+    ->yarn add @react-navigation/stack
+  ->Configurar 'src/index.js'
+  ->Configurar 'MainActivity.java' (ver documentação do 'React Native Gesture Handler')
+    ->yarn add react-native-gesture-handler
+    ->react-native link react-native-gesture-handler
+
+--TELA DE LOGIN
+  ->yarn add styled-components
+  ->yarn add prop-types
+  ->Criar pasta 'pages'
+    ->Criar pasta 'SignIn'
+      ->'index.js'
+      ->'styles.js'
+
+--CRIAR INPUT E BUTTON
+  ->yarn add react-native-vector-icons
+  ->Criar pasta 'components'
+    ->Criar pasta 'Button'
+      ->'index.js'
+      ->'styles.js'
+    ->Criar pasta 'Input'
+      ->'index.js'
+      ->'styles.js'
+
+--IMPORTANDO STATUSBAR
+  -Importar { StatusBar } no 'src/index.js'
+
+--CONFIGURANDO REDUX, SAGA, PERSISTE E REACTOTRON
+  ->yarn add redux redux-saga react-redux react-redux reactotron-redux reactotron-react-native
+    reactotron-redux-saga immer redux-persist @react-native-community/async-storage
+  ->Criar pasta 'store'
+    ->'createStore.js'
+    ->'persistReducer.js'
+    ->'index.js'
+    ->'modules'
+      ->'rootReducer.js'
+      ->'rootSaga.js'
+      ->'auth'
+        ->'actions.js'
+        ->'reducer.js'
+        ->'sagas.js'
+  ->Criar pasta 'config'
+    ->'ReactotronConfig.js'
+  ->Criar arquivo 'App.js' em 'src'
+  ->Configurar 'index.js' em 'src'
+
+--CRIAR API
+  ->yarn add axios
+  ->Criar pasta 'services'
+    ->'api.js'
+
+--TELA DE DASHBOARD
+  ->Criar pasta 'Dashboard' em 'pages'
+    ->'index.js'
+    ->'styles.js'
+  ->Configurar Tab Navigation (ver documentação 'React Navigation')
+    ->yarn add @react-navigation/bottom-tabs
+    ->Configurar 'routes.js'
+
