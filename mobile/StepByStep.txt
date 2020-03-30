@@ -1,0 +1,15 @@
+--INICIANDO PROJETO COM REACT NATIVE
+  ->react-native init mobile
+    ->Deletar 'App.js', '.eslintrc' e '.prettierrc'
+    ->Criar pasta 'src'
+      ->Criar arquivo 'index.js'
+
+--INSTALAR E CONFIGURAR ESLINT E PRETTIER
+  -yarn add eslint -D
+    ->yarn eslint --init
+      ->Remover 'package-lock.json'
+        ->yarn
+  -Instalar pacotes e plugins
+    ->yarn add prettier eslint-config-prettier eslint-plugin-prettier babel-eslint -D
+  ->Configurar arquivo '.eslintrc.js'
+  ->Criar arquivo '.prettierrc' e configurar
