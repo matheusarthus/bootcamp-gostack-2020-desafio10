@@ -1,8 +1,13 @@
 import React from 'react';
-import { View } from 'react-native';
 
-// import { Container } from './styles';
+import Header from './Header';
+
+import { Container } from './styles';
 
 export default function Dashboard() {
-  return <View />;
+  return (
+    <Container>
+      <Header />
+    </Container>
+  );
 }

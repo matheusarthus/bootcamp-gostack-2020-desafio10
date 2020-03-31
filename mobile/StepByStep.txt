@@ -40,6 +40,7 @@
 
 --CRIAR INPUT E BUTTON
   ->yarn add react-native-vector-icons
+    ->Configurar 'android/app/build.gradle' (ver documentação oblador/react-native-vector-icons)
   ->Criar pasta 'components'
     ->Criar pasta 'Button'
       ->'index.js'
@@ -83,3 +84,8 @@
     ->yarn add @react-navigation/bottom-tabs
     ->Configurar 'routes.js'
 
+--TELA DE PERFIL
+  ->Criar pasta 'Profile' em 'pages'
+    ->'index.js'
+    ->'styles.js'
+    ->Inserir page no 'routes.js'

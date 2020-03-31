@@ -3,10 +3,11 @@ import React from 'react';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 
+import { StatusBar } from 'react-native';
+
 import './config/ReactotronConfig';
 
 import { NavigationContainer } from '@react-navigation/native';
-import { StatusBar } from 'react-native';
 
 import { store, persistor } from './store';
 import App from '~/App';
