@@ -11,8 +11,6 @@ export function* signIn({ payload }) {
 
     const response = yield call(api.get, `deliveries/${id}`);
 
-    console.tron.log(response.data);
-
     yield put(signInSuccess(response.data));
   } catch (err) {
     Alert.alert(

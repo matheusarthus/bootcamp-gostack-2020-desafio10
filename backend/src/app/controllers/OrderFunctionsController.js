@@ -5,7 +5,19 @@ import File from '../models/File';
 
 class OrderFunctionsController {
   async index(req, res) {
-    const deliveryman = await Deliveryman.findByPk(req.params.id);
+    const deliveryman = await Deliveryman.findOne({
+      where: {
+        id: req.params.id,
+      },
+      attributes: ['id', 'name', 'email', 'createdAt'],
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+          attributes: ['id', 'path', 'url'],
+        },
+      ],
+    });
 
     if (!deliveryman) {
       return res.status(400).json({ error: 'Deliveryman does not exist.' });
@@ -23,11 +35,6 @@ class OrderFunctionsController {
           as: 'recipient',
           attributes: ['name', 'logradouro', 'numero', 'cidade', 'estado'],
         },
-        {
-          model: Deliveryman,
-          as: 'deliveryman',
-          attributes: ['name', 'email'],
-        },
       ],
     });
 
@@ -35,7 +42,9 @@ class OrderFunctionsController {
       return res.status(400).json({ error: 'There are no orders.' });
     }
 
-    return res.json(orders);
+    const data = { deliveryman, orders };
+
+    return res.json(data);
   }
 
   async update(req, res) {
