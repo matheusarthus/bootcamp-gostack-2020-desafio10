@@ -1,6 +1,9 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
+
+import { signOut } from '~/store/modules/auth/actions';
 
 import {
   Container,
@@ -19,19 +22,31 @@ import {
 } from './styles';
 
 export default function Header() {
+  const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.user.user);
+
+  function handleLogout() {
+    dispatch(signOut());
+  }
+
   return (
     <Container>
       <Top>
         <Content>
           <Avatar
-            source={{ uri: 'https://api.adorable.io/avatar/50/GASPAR.png' }}
+            source={{
+              uri: user.avatar
+                ? user.avatar.url
+                : `https://api.adorable.io/avatar/50/${user.name}.png`,
+            }}
           />
           <TextContainer>
             <Welcome>Bem vindo de volta,</Welcome>
-            <Name>Gaspar Antunes</Name>
+            <Name>{user.name}</Name>
           </TextContainer>
         </Content>
-        <LogoutButton>
+        <LogoutButton onPress={handleLogout}>
           <Icon name="exit-to-app" size={20} color="#E74040" />
         </LogoutButton>
       </Top>
