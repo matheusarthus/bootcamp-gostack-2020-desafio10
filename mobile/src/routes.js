@@ -7,11 +7,43 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import SignIn from '~/pages/SignIn';
 
-import Dashboard from '~/pages/Dashboard';
 import Profile from '~/pages/Profile';
+
+import Dashboard from '~/pages/Main/Dashboard';
+import DetailsOrder from '~/pages/Main/DetailsOrder';
+import ConfirmOrder from '~/pages/Main/ConfirmOrder';
+import SubmitProblem from '~/pages/Main/SubmitProplem';
+import ViewProblems from '~/pages/Main/ViewProblems';
+
+import HeaderDashboard from '~/pages/Main/Dashboard/Header';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+
+function MainStack() {
+  return (
+    <Stack.Navigator
+      headerMode="screen"
+      screenOptions={{
+        header: ({ navigation }) => {
+          return <HeaderDashboard navigation={navigation} />;
+        },
+      }}
+    >
+      <Stack.Screen
+        name="Dashboard"
+        component={Dashboard}
+        /* options={({ navigation }) => ({
+          header: () => <HeaderDashboard navigation={navigation} />,
+        })} */
+      />
+      <Stack.Screen name="DetailsOrder" component={DetailsOrder} />
+      <Stack.Screen name="ConfirmOrder" component={ConfirmOrder} />
+      <Stack.Screen name="SubmitProblem" component={SubmitProblem} />
+      <Stack.Screen name="ViewProblems" component={ViewProblems} />
+    </Stack.Navigator>
+  );
+}
 
 export default function createRouter(isSigned = false) {
   return !isSigned ? (
@@ -31,8 +63,8 @@ export default function createRouter(isSigned = false) {
       }}
     >
       <Tab.Screen
-        name="Dashboard"
-        component={Dashboard}
+        name="Main"
+        component={MainStack}
         options={{
           tabBarLabel: 'Entregas',
           tabBarIcon: ({ color }) => (

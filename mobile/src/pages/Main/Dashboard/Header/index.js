@@ -18,10 +18,12 @@ import {
   Title,
   SelectOrders,
   OptionOne,
+  OptionOneButton,
   OptionTwo,
+  OptionTwoButton,
 } from './styles';
 
-export default function Header() {
+export default function Header({ navigation }) {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user.user);
@@ -36,14 +38,14 @@ export default function Header() {
         <Content>
           <Avatar
             source={{
-              uri: user.avatar
+              uri: user
                 ? user.avatar.url
-                : `https://api.adorable.io/avatar/50/${user.name}.png`,
+                : `https://api.adorable.io/avatar/50/avatar.png`,
             }}
           />
           <TextContainer>
             <Welcome>Bem vindo de volta,</Welcome>
-            <Name>{user.name}</Name>
+            <Name>{user ? user.name : 'Sem nome'}</Name>
           </TextContainer>
         </Content>
         <LogoutButton onPress={handleLogout}>
@@ -53,8 +55,12 @@ export default function Header() {
       <Bottom>
         <Title>Entregas</Title>
         <SelectOrders>
-          <OptionOne>Pendentes</OptionOne>
-          <OptionTwo>Entregues</OptionTwo>
+          <OptionOneButton onPress={() => {}}>
+            <OptionOne>Pendentes</OptionOne>
+          </OptionOneButton>
+          <OptionTwoButton onPress={() => {}}>
+            <OptionTwo>Entregues</OptionTwo>
+          </OptionTwoButton>
         </SelectOrders>
       </Bottom>
     </Container>

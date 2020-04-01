@@ -17,7 +17,6 @@ import authMiddleware from './app/middlewares/auth';
 const routes = new Router();
 const upload = multer(multerConfig);
 
-routes.get('/deliveryman/:id', DeliverymanFunctionsController.index);
 routes.put(
   '/deliveryman/:deliveryman_id/delivery/:delivery_id',
   DeliverymanFunctionsController.update

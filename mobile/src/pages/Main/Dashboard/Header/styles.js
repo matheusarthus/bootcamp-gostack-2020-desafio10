@@ -2,6 +2,7 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
+  padding: 10px;
 `;
 
 export const Top = styled.View`
@@ -62,8 +63,12 @@ export const OptionOne = styled.Text`
   text-decoration: underline #7d40e7;
 `;
 
+export const OptionOneButton = styled.TouchableOpacity``;
+
 export const OptionTwo = styled.Text`
   font-size: 14px;
   color: #999;
   margin-left: 10px;
 `;
+
+export const OptionTwoButton = styled.TouchableOpacity``;

@@ -1,3 +1,4 @@
+import Sequelize from 'sequelize';
 import Order from '../models/Order';
 import Deliveryman from '../models/Deliveryman';
 import Recipient from '../models/Recipient';
@@ -23,7 +24,7 @@ class OrderFunctionsController {
       return res.status(400).json({ error: 'Deliveryman does not exist.' });
     }
 
-    const orders = await Order.findAll({
+    const pendingOrders = await Order.findAll({
       where: {
         deliveryman_id: req.params.id,
         canceled_at: null,
@@ -38,11 +39,34 @@ class OrderFunctionsController {
       ],
     });
 
-    if (!orders) {
-      return res.status(400).json({ error: 'There are no orders.' });
+    if (!pendingOrders) {
+      return res
+        .status(400)
+        .json({ error: 'There are no orders for this deliveryman.' });
     }
 
-    const data = { deliveryman, orders };
+    const deliveredOrders = await Order.findAll({
+      where: {
+        deliveryman_id: req.params.id,
+        canceled_at: null,
+        end_date: { [Sequelize.Op.not]: null },
+      },
+      include: [
+        {
+          model: Recipient,
+          as: 'recipient',
+          attributes: ['name', 'logradouro', 'numero', 'cidade', 'estado'],
+        },
+      ],
+    });
+
+    if (!deliveredOrders) {
+      return res
+        .status(400)
+        .json({ error: 'This deliveryman did not deliver any orders.' });
+    }
+
+    const data = { deliveryman, pendingOrders, deliveredOrders };
 
     return res.json(data);
   }
