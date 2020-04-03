@@ -7,6 +7,7 @@ export const Container = styled.SafeAreaView`
 export const OrdersList = styled.FlatList.attrs({
   showsVerticalScrollIndicator: false,
 })`
+  background: #999;
   margin-top: 60px;
   padding: 0 20px;
 `;

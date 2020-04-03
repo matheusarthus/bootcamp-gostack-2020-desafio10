@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 export const Container = styled.View`
   flex: 1;
   padding: 10px;
+  top: 0;
 `;
 
 export const Top = styled.View`
@@ -58,16 +59,20 @@ export const SelectOrders = styled.View`
 
 export const OptionOne = styled.Text`
   font-size: 14px;
-  color: #7d40e7;
-  font-weight: bold;
-  text-decoration: underline #7d40e7;
+  color: ${(props) => (props.mode === 'pending' ? '#7d40e7' : '#999')};
+  font-weight: ${(props) => (props.mode === 'pending' ? 'bold' : 'normal')};
+  text-decoration: ${(props) =>
+    props.mode === 'pending' ? 'underline #7d40e7' : 'none'};
 `;
 
 export const OptionOneButton = styled.TouchableOpacity``;
 
 export const OptionTwo = styled.Text`
   font-size: 14px;
-  color: #999;
+  color: ${(props) => (props.mode === 'delivered' ? '#7d40e7' : '#999')};
+  font-weight: ${(props) => (props.mode === 'delivered' ? 'bold' : 'normal')};
+  text-decoration: ${(props) =>
+    props.mode === 'delivered' ? 'underline #7d40e7' : 'none'};
   margin-left: 10px;
 `;
 

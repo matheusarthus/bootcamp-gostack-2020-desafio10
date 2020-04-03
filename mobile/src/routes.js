@@ -1,4 +1,5 @@
 import React from 'react';
+import { Text, TouchableOpacity } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -15,27 +16,18 @@ import ConfirmOrder from '~/pages/Main/ConfirmOrder';
 import SubmitProblem from '~/pages/Main/SubmitProplem';
 import ViewProblems from '~/pages/Main/ViewProblems';
 
-import HeaderDashboard from '~/pages/Main/Dashboard/Header';
-
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 function MainStack() {
   return (
-    <Stack.Navigator
-      headerMode="screen"
-      screenOptions={{
-        header: ({ navigation }) => {
-          return <HeaderDashboard navigation={navigation} />;
-        },
-      }}
-    >
+    <Stack.Navigator>
       <Stack.Screen
         name="Dashboard"
         component={Dashboard}
-        /* options={({ navigation }) => ({
-          header: () => <HeaderDashboard navigation={navigation} />,
-        })} */
+        options={{
+          headerShown: false,
+        }}
       />
       <Stack.Screen name="DetailsOrder" component={DetailsOrder} />
       <Stack.Screen name="ConfirmOrder" component={ConfirmOrder} />

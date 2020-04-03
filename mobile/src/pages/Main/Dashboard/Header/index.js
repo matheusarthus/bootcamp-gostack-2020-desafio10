@@ -23,13 +23,19 @@ import {
   OptionTwoButton,
 } from './styles';
 
-export default function Header({ navigation }) {
+export default function Header({ viewMode, setViewMode }) {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user.user);
 
+  console.tron.log(viewMode);
+
   function handleLogout() {
     dispatch(signOut());
+  }
+
+  function handleViewMode(mode) {
+    setViewMode(mode);
   }
 
   return (
@@ -55,11 +61,19 @@ export default function Header({ navigation }) {
       <Bottom>
         <Title>Entregas</Title>
         <SelectOrders>
-          <OptionOneButton onPress={() => {}}>
-            <OptionOne>Pendentes</OptionOne>
+          <OptionOneButton
+            onPress={() => {
+              handleViewMode('pending');
+            }}
+          >
+            <OptionOne mode={viewMode}>Pendentes</OptionOne>
           </OptionOneButton>
-          <OptionTwoButton onPress={() => {}}>
-            <OptionTwo>Entregues</OptionTwo>
+          <OptionTwoButton
+            onPress={() => {
+              handleViewMode('delivered');
+            }}
+          >
+            <OptionTwo mode={viewMode}>Entregues</OptionTwo>
           </OptionTwoButton>
         </SelectOrders>
       </Bottom>

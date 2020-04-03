@@ -15,6 +15,12 @@ export default function auth(state = INITIAL_STATE, action) {
         draft.deliveredOrders = action.payload.data.deliveredOrders;
         break;
       }
+      case '@auth/SIGN_OUT': {
+        draft.user = null;
+        draft.pendingOrders = null;
+        draft.deliveredOrders = null;
+        break;
+      }
       default:
     }
   });
