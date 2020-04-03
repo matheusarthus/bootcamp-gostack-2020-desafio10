@@ -13,13 +13,23 @@ export default function Dashboard() {
   const pendingOrders = useSelector((state) => state.user.pendingOrders);
   const deliveredOrders = useSelector((state) => state.user.deliveredOrders);
 
-  useEffect(() => {});
+  useEffect(() => {
+    if (viewMode === 'pending') {
+      setCache(pendingOrders);
+    } else {
+      setCache(deliveredOrders);
+    }
+  }, [viewMode, pendingOrders, deliveredOrders]);
 
   return (
     <Container>
       <Header viewMode={viewMode} setViewMode={setViewMode} />
 
-      <OrdersList />
+      <OrdersList
+        data={cache}
+        keyStractor={(item) => String(item.id)}
+        renderItem={({ item }) => <Order data={item} />}
+      />
     </Container>
   );
 }

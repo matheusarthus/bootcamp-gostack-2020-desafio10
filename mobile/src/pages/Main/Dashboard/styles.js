@@ -1,13 +1,12 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.SafeAreaView`
-  flex: 1;
+  padding: 0 0 30px 0;
 `;
 
 export const OrdersList = styled.FlatList.attrs({
   showsVerticalScrollIndicator: false,
 })`
-  background: #999;
-  margin-top: 60px;
-  padding: 0 20px;
+  margin-top: 110px;
+  padding: 0 12px;
 `;

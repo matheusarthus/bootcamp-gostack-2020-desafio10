@@ -28,8 +28,6 @@ export default function Header({ viewMode, setViewMode }) {
 
   const user = useSelector((state) => state.user.user);
 
-  console.tron.log(viewMode);
-
   function handleLogout() {
     dispatch(signOut());
   }

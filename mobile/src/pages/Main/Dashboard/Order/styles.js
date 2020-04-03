@@ -50,7 +50,7 @@ export const Circle2 = styled.View`
   height: 10px;
   border-radius: 5px;
   border: solid 1px #7d40e7;
-  background: #fff;
+  background: ${(props) => (props.status ? '#7d40e7' : '#fff')};
 `;
 
 export const Circle3 = styled.View`
@@ -58,17 +58,17 @@ export const Circle3 = styled.View`
   height: 10px;
   border-radius: 5px;
   border: solid 1px #7d40e7;
-  background: #fff;
+  background: ${(props) => (props.status ? '#7d40e7' : '#fff')};
 `;
 
 export const Line1 = styled.View`
-  width: 120px;
+  width: 121px;
   height: 2px;
   background: #7d40e7;
 `;
 
 export const Line2 = styled.View`
-  width: 120px;
+  width: 121px;
   height: 2px;
   background: #7d40e7;
 `;

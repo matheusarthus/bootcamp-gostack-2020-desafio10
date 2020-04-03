@@ -1,4 +1,5 @@
 import React from 'react';
+import { parseISO, format } from 'date-fns';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -32,20 +33,24 @@ import {
   DetailsLinkText,
 } from './styles';
 
-export default function Order() {
+export default function Order({ data }) {
+  function dateFormatted(date) {
+    return format(parseISO(date), 'MM/dd/yyyy');
+  }
+
   return (
     <Container>
       <Top>
         <Icon name="local-shipping" size={20} color="#7d40e7" />
-        <Delivery>Encomenda 01</Delivery>
+        <Delivery>Encomenda {data.id}</Delivery>
       </Top>
       <Mid>
         <DivShapes>
           <Circle1 />
           <Line1 />
-          <Circle2 />
+          <Circle2 status={data.start_date} />
           <Line2 />
-          <Circle3 />
+          <Circle3 status={data.end_date} />
         </DivShapes>
         <DivStatus>
           <DivWaiting>
@@ -63,11 +68,11 @@ export default function Order() {
       <Bottom>
         <DivDate>
           <TitleDate>Data</TitleDate>
-          <Date>15/01/2020</Date>
+          <Date>{dateFormatted(data.createdAt)}</Date>
         </DivDate>
         <DivInfo>
           <TitleCity>Cidade</TitleCity>
-          <City>Rio do Sul</City>
+          <City>{data.recipient.cidade}</City>
         </DivInfo>
         <DetailsLink onPress={() => {}}>
           <DetailsLinkText>Ver detalhes</DetailsLinkText>
