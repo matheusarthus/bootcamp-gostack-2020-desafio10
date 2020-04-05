@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -21,7 +21,15 @@ const Tab = createBottomTabNavigator();
 
 function MainStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerTransparent: true,
+        headerTintColor: '#fff',
+        headerLeftContainerStyle: {
+          marginLeft: 15,
+        },
+      }}
+    >
       <Stack.Screen
         name="Dashboard"
         component={Dashboard}
@@ -29,7 +37,22 @@ function MainStack() {
           headerShown: false,
         }}
       />
-      <Stack.Screen name="DetailsOrder" component={DetailsOrder} />
+      <Stack.Screen
+        name="DetailsOrder"
+        component={DetailsOrder}
+        options={({ navigation }) => ({
+          headerTitle: 'Detalhes da encomenda',
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.goBack();
+              }}
+            >
+              <Icon name="chevron-left" size={26} color="#fff" />
+            </TouchableOpacity>
+          ),
+        })}
+      />
       <Stack.Screen name="ConfirmOrder" component={ConfirmOrder} />
       <Stack.Screen name="SubmitProblem" component={SubmitProblem} />
       <Stack.Screen name="ViewProblems" component={ViewProblems} />
@@ -48,8 +71,12 @@ export default function createRouter(isSigned = false) {
         activeTintColor: '#7D40E7',
         inactiveTintColor: '#999',
         style: {
-          backgroundColor: '#fff',
-          paddingTop: 10,
+          padding: 30,
+        },
+        labelStyle: {
+          fontSize: 14,
+          position: 'relative',
+          top: 15,
         },
         keyboardHidesTabBar: true,
       }}

@@ -34,7 +34,14 @@ class OrderFunctionsController {
         {
           model: Recipient,
           as: 'recipient',
-          attributes: ['name', 'logradouro', 'numero', 'cidade', 'estado'],
+          attributes: [
+            'name',
+            'logradouro',
+            'numero',
+            'cidade',
+            'estado',
+            'cep',
+          ],
         },
       ],
     });
@@ -55,7 +62,14 @@ class OrderFunctionsController {
         {
           model: Recipient,
           as: 'recipient',
-          attributes: ['name', 'logradouro', 'numero', 'cidade', 'estado'],
+          attributes: [
+            'name',
+            'logradouro',
+            'numero',
+            'cidade',
+            'estado',
+            'cep',
+          ],
         },
       ],
     });

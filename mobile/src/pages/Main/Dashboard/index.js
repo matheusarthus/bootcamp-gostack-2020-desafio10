@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Header from './Header';
@@ -6,19 +6,26 @@ import Order from './Order';
 
 import { Container, OrdersList } from './styles';
 
-export default function Dashboard() {
-  const [viewMode, setViewMode] = useState('pending');
-  const [cache, setCache] = useState([]);
+import { refreshOrdersRequest } from '~/store/modules/user/actions';
 
+export default function Dashboard({ navigation }) {
+  const dispatch = useDispatch();
+
+  const [viewMode, setViewMode] = useState('pending');
+
+  const user = useSelector((state) => state.user.user);
   const pendingOrders = useSelector((state) => state.user.pendingOrders);
   const deliveredOrders = useSelector((state) => state.user.deliveredOrders);
 
   useEffect(() => {
+    dispatch(refreshOrdersRequest(user.id));
+  }, [dispatch, user.id]);
+
+  const cache = useMemo(() => {
     if (viewMode === 'pending') {
-      setCache(pendingOrders);
-    } else {
-      setCache(deliveredOrders);
+      return pendingOrders;
     }
+    return deliveredOrders;
   }, [viewMode, pendingOrders, deliveredOrders]);
 
   return (
@@ -28,7 +35,7 @@ export default function Dashboard() {
       <OrdersList
         data={cache}
         keyStractor={(item) => String(item.id)}
-        renderItem={({ item }) => <Order data={item} />}
+        renderItem={({ item }) => <Order data={item} navigation={navigation} />}
       />
     </Container>
   );

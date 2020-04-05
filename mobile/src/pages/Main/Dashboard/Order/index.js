@@ -33,9 +33,9 @@ import {
   DetailsLinkText,
 } from './styles';
 
-export default function Order({ data }) {
+export default function Order({ data, navigation }) {
   function dateFormatted(date) {
-    return format(parseISO(date), 'MM/dd/yyyy');
+    return format(parseISO(date), 'dd/MM/yyyy');
   }
 
   return (
@@ -74,7 +74,11 @@ export default function Order({ data }) {
           <TitleCity>Cidade</TitleCity>
           <City>{data.recipient.cidade}</City>
         </DivInfo>
-        <DetailsLink onPress={() => {}}>
+        <DetailsLink
+          onPress={() => {
+            navigation.navigate('DetailsOrder', { data });
+          }}
+        >
           <DetailsLinkText>Ver detalhes</DetailsLinkText>
         </DetailsLink>
       </Bottom>

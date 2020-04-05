@@ -8,13 +8,14 @@ import { StatusBar } from 'react-native';
 import './config/ReactotronConfig';
 
 import { NavigationContainer } from '@react-navigation/native';
+import { navigationRef } from '~/services/RootNavigation';
 
 import { store, persistor } from './store';
 import App from '~/App';
 
 export default function Index() {
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Provider store={store}>
         <PersistGate persistor={persistor}>
           <StatusBar barStyle="light-content" backgroundColor="#7D40E7" />
