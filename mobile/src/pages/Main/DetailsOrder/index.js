@@ -46,7 +46,7 @@ import {
   NewStatus,
 } from './styles';
 
-export default function DetailsOrder({ route }) {
+export default function DetailsOrder({ navigation, route }) {
   const dispatch = useDispatch();
 
   const order = route.params.data;
@@ -59,8 +59,6 @@ export default function DetailsOrder({ route }) {
   function handleStartOrder(deliveryman_id, order_id) {
     dispatch(startOrderRequest(deliveryman_id, order_id));
   }
-
-  function handleConfirmOrder() {}
 
   return (
     <Container>
@@ -131,7 +129,9 @@ export default function DetailsOrder({ route }) {
           </ViewProblemsButton>
           <ChangeStatusButton
             onPress={() => {
-              handleStartOrder(order.deliveryman_id, order.id);
+              !order.start_date
+                ? handleStartOrder(order.deliveryman_id, order.id)
+                : navigation.navigate('ConfirmOrder');
             }}
             end_date={order.end_date}
             disabled={order.end_date}

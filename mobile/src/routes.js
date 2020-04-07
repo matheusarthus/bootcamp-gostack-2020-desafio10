@@ -25,6 +25,7 @@ function MainStack() {
       screenOptions={{
         headerTransparent: true,
         headerTintColor: '#fff',
+        headerTitleAlign: 'center',
         headerLeftContainerStyle: {
           marginLeft: 15,
         },
@@ -53,7 +54,22 @@ function MainStack() {
           ),
         })}
       />
-      <Stack.Screen name="ConfirmOrder" component={ConfirmOrder} />
+      <Stack.Screen
+        name="ConfirmOrder"
+        component={ConfirmOrder}
+        options={({ navigation }) => ({
+          headerTitle: 'Confirmar entrega',
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.goBack();
+              }}
+            >
+              <Icon name="chevron-left" size={26} color="#fff" />
+            </TouchableOpacity>
+          ),
+        })}
+      />
       <Stack.Screen name="SubmitProblem" component={SubmitProblem} />
       <Stack.Screen name="ViewProblems" component={ViewProblems} />
     </Stack.Navigator>
