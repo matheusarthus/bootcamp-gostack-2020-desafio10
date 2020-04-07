@@ -1,12 +1,18 @@
 import React, { useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { RNCamera } from 'react-native-camera';
 
 import { Container, Background, CameraContainer, SendButton } from './styles';
 
-import api from '~/services/api';
+import { confirmOrderRequest } from '~/store/modules/user/actions';
 
-export default function ConfirmOrder() {
+export default function ConfirmOrder({ route }) {
   const camera = useRef(null);
+
+  const dispatch = useDispatch();
+
+  const deliveryman_id = useSelector((state) => state.user.user.id);
+  const { order_id } = route.params;
 
   async function takePicture() {
     if (camera) {
@@ -17,10 +23,9 @@ export default function ConfirmOrder() {
         fixOrientation: true,
       };
 
-      const timeStamp = new Date();
-
       const data = await camera.current.takePictureAsync(options);
-      console.tron.log(data.uri);
+
+      const timeStamp = new Date();
 
       const formData = new FormData();
       formData.append('file', {
@@ -29,11 +34,7 @@ export default function ConfirmOrder() {
         name: `${data.uri}_${timeStamp}.jpg`,
       });
 
-      console.tron.log(formData);
-
-      const response = await api.post('files', formData);
-
-      console.tron.log(response);
+      dispatch(confirmOrderRequest(formData, order_id, deliveryman_id));
     }
   }
 

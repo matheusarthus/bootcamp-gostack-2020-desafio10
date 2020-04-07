@@ -19,9 +19,9 @@ export function startOrderRequest(deliveryman_id, order_id) {
   };
 }
 
-export function startOrderSuccess(id) {
+export function confirmOrderRequest(formData, order_id, deliveryman_id) {
   return {
-    type: '@user/START_ORDER_SUCCESS',
-    payload: { id },
+    type: '@user/CONFIRM_ORDER_REQUEST',
+    payload: { formData, order_id, deliveryman_id },
   };
 }

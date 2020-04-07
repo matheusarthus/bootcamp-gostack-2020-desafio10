@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable no-nested-ternary */
 import React from 'react';
 import { useDispatch } from 'react-redux';
@@ -131,7 +132,7 @@ export default function DetailsOrder({ navigation, route }) {
             onPress={() => {
               !order.start_date
                 ? handleStartOrder(order.deliveryman_id, order.id)
-                : navigation.navigate('ConfirmOrder');
+                : navigation.navigate('ConfirmOrder', { order_id: order.id });
             }}
             end_date={order.end_date}
             disabled={order.end_date}
