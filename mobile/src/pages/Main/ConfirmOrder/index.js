@@ -8,55 +8,11 @@ import api from '~/services/api';
 export default function ConfirmOrder() {
   const camera = useRef(null);
 
-  /*  async function takePicture() {
-    if (camera) {
-      const options = {
-        quality: 0.5,
-        base64: true,
-        forceUpOrientation: true,
-        fixOrientation: true,
-      };
-
-      const data = await camera.current.takePictureAsync(options);
-      console.tron.log(data.uri);
-
-      const cleanURL = data.uri.replace('file://', '');
-
-      console.tron.log(cleanURL);
-
-      const formData = new FormData();
-      formData.append('file', {
-        uri: cleanURL,
-        type: 'image/jpeg',
-        name: `${data.uri}_${'1'}.jpg`,
-      });
-
-      console.tron.log(formData);
-
-      const response = await api.post('files', formData);
-
-      console.tron.log(response);
-
-      const formData = new FormData();
-      formData.append('file', {
-        uri: cleanURL,
-        type: 'image/jpeg',
-        name: 'testPhotoName',
-      });
-      fetch('http://192.168.15.109:3334/files/', {
-        method: 'post',
-        body: formData,
-      }).then((res) => {
-        console.tron.log(res);
-      });
-    }
-  } */
-
   async function takePicture() {
     if (camera) {
       const options = {
         quality: 0.5,
-        base64: true,
+        base64: false,
         forceUpOrientation: true,
         fixOrientation: true,
       };

@@ -1,3 +1,4 @@
+/* eslint-disable import/named */
 import 'react-native-gesture-handler';
 import React from 'react';
 import { PersistGate } from 'redux-persist/integration/react';
