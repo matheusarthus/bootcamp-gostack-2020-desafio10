@@ -70,8 +70,38 @@ function MainStack() {
           ),
         })}
       />
-      <Stack.Screen name="SubmitProblem" component={SubmitProblem} />
-      <Stack.Screen name="ViewProblems" component={ViewProblems} />
+      <Stack.Screen
+        name="SubmitProblem"
+        component={SubmitProblem}
+        options={({ navigation }) => ({
+          headerTitle: 'Informar problema',
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.goBack();
+              }}
+            >
+              <Icon name="chevron-left" size={26} color="#fff" />
+            </TouchableOpacity>
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="ViewProblems"
+        component={ViewProblems}
+        options={({ navigation }) => ({
+          headerTitle: 'Visualizar problemas',
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.goBack();
+              }}
+            >
+              <Icon name="chevron-left" size={26} color="#fff" />
+            </TouchableOpacity>
+          ),
+        })}
+      />
     </Stack.Navigator>
   );
 }

@@ -120,11 +120,19 @@ export default function DetailsOrder({ navigation, route }) {
         </ContentStatus>
 
         <ContainerButtons>
-          <InfoProblemButton>
+          <InfoProblemButton
+            onPress={() => {
+              navigation.navigate('SubmitProblem', { order_id: order.id });
+            }}
+          >
             <Icon name="highlight-off" size={20} color="#E74040" />
             <InfoProblem>Informar Problema</InfoProblem>
           </InfoProblemButton>
-          <ViewProblemsButton>
+          <ViewProblemsButton
+            onPress={() => {
+              navigation.navigate('ViewProblems', { order_id: order.id });
+            }}
+          >
             <Icon name="info-outline" size={20} color="#E7BA40" />
             <ViewProblems>Visualizar Problemas</ViewProblems>
           </ViewProblemsButton>

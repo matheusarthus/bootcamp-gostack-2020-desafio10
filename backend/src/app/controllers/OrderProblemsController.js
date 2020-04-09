@@ -15,7 +15,7 @@ class OrderProblemsController {
 
     const problems = await Problem.findAll({
       where: { delivery_id: req.params.id },
-      attributes: ['description'],
+      attributes: ['id', 'description', 'created_at'],
     });
 
     return res.json(problems);
