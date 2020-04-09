@@ -14,7 +14,7 @@ export default function ViewProblems({ navigation, route }) {
   useEffect(() => {
     async function loadProblems() {
       try {
-        const response = await api.get(`problems/4`);
+        const response = await api.get(`problems/${order_id}`);
 
         setProblems(response.data);
       } catch (err) {

@@ -25,6 +25,8 @@ export default function Profile() {
   const user = useSelector((state) => state.user.user);
 
   function handleLogout() {
+    console.tron.log('SignOut');
+
     dispatch(signOut());
   }
 
