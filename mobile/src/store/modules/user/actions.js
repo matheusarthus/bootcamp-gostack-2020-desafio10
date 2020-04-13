@@ -1,14 +1,14 @@
-export function refreshOrdersRequest(id) {
+export function refreshOrdersRequest(id, page) {
   return {
     type: '@user/REFRESH_ORDERS_REQUEST',
-    payload: { id },
+    payload: { id, page },
   };
 }
 
-export function refreshOrdersSuccess(data) {
+export function refreshOrdersSuccess(data, page) {
   return {
     type: '@user/REFRESH_ORDERS_SUCCESS',
-    payload: { data },
+    payload: { data, page },
   };
 }
 

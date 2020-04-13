@@ -9,13 +9,17 @@ export function* signIn({ payload }) {
   try {
     const { id } = payload;
 
-    const response = yield call(api.get, `deliveries/${id}`);
+    const response = yield call(api.get, `deliveries/${id}`, {
+      params: {
+        page: 1,
+      },
+    });
 
     yield put(signInSuccess(response.data));
   } catch (err) {
     Alert.alert(
       'Falha no acesso',
-      'Houve um erro no acesso, verifique seu ID.'
+      `Houve um erro no acesso, verifique seu ID. Error: ${err.response.data.error}`
     );
     yield put(signFailure());
   }

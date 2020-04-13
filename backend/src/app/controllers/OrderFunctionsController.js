@@ -6,6 +6,11 @@ import File from '../models/File';
 
 class OrderFunctionsController {
   async index(req, res) {
+    const { page } = req.query;
+
+    const limit = 5;
+    const offset = (page - 1) * limit;
+
     const deliveryman = await Deliveryman.findOne({
       where: {
         id: req.params.id,
@@ -30,6 +35,8 @@ class OrderFunctionsController {
         canceled_at: null,
         end_date: null,
       },
+      limit,
+      offset,
       include: [
         {
           model: Recipient,
@@ -58,6 +65,8 @@ class OrderFunctionsController {
         canceled_at: null,
         end_date: { [Sequelize.Op.not]: null },
       },
+      limit,
+      offset,
       include: [
         {
           model: Recipient,

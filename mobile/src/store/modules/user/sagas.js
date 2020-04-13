@@ -8,15 +8,21 @@ import { refreshOrdersRequest, refreshOrdersSuccess } from './actions';
 
 export function* refreshOrders({ payload }) {
   try {
-    const { id } = payload;
+    const { id, page } = payload;
 
-    const response = yield call(api.get, `deliveries/${id}`);
+    const response = yield call(api.get, `deliveries/${id}`, {
+      params: {
+        page,
+      },
+    });
 
-    yield put(refreshOrdersSuccess(response.data));
+    console.tron.log(response);
+
+    yield put(refreshOrdersSuccess(response.data, page));
   } catch (err) {
     Alert.alert(
       'Falha na atualização',
-      'Houve uma falha na atualização das encomendas.'
+      `Houve uma falha na atualização das encomendas. Error: ${err.response.data.error}`
     );
   }
 }
@@ -35,7 +41,7 @@ export function* startOrder({ payload }) {
   } catch (err) {
     Alert.alert(
       'Falha no acesso à API',
-      'Houve um erro na atualização da encomenda.'
+      `Houve um erro na atualização da encomenda. Error: ${err.response.data.error}`
     );
   }
 }
@@ -62,13 +68,13 @@ export function* confirmOrder({ payload }) {
     } catch (err) {
       Alert.alert(
         'Falha na confirmação',
-        'Houve um erro na confirmação da entrega, tente novamente.'
+        `Houve um erro na confirmação da entrega, tente novamente. Error: ${err.response.data.error}`
       );
     }
   } catch (err) {
     Alert.alert(
       'Falha no upload',
-      'Houve um erro no upload da imagem, tente novamente.'
+      `Houve um erro no upload da imagem, tente novamente. Error: ${err.response.data.error}`
     );
   }
 }
