@@ -7,13 +7,18 @@ const { Op } = require('sequelize');
 
 class DeliverymanController {
   async index(req, res) {
-    const { deliveryman } = req.query;
+    const { deliveryman, page } = req.query;
+
+    const limit = 10;
+    const offset = (page - 1) * limit;
 
     const deliverymen = await Deliveryman.findAll({
       where: {
         name: { [Op.like]: `%${deliveryman}%` },
         deleted_at: null,
       },
+      limit,
+      offset,
       order: ['created_at'],
       attributes: ['id', 'name', 'email', 'deleted_at'],
       include: [
