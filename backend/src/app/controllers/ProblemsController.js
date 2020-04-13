@@ -5,9 +5,16 @@ import Recipient from '../models/Recipient';
 
 class ProblemsController {
   async index(req, res) {
+    const { page } = req.query;
+
+    const limit = 10;
+    const offset = (page - 1) * limit;
+
     const problems = await Problem.findAll({
       attributes: ['id', 'delivery_id', 'description'],
       order: ['created_at'],
+      limit,
+      offset,
       include: [
         {
           model: Order,
