@@ -7,10 +7,10 @@ const { Op } = require('sequelize');
 
 class DeliverymanController {
   async index(req, res) {
-    const { deliveryman, page } = req.query;
+    const { deliveryman, page, noLimit } = req.query;
 
-    const limit = 10;
-    const offset = (page - 1) * limit;
+    const limit = noLimit ? null : 10;
+    const offset = noLimit ? 0 : (page - 1) * limit;
 
     const deliverymen = await Deliveryman.findAll({
       where: {

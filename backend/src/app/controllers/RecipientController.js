@@ -5,10 +5,10 @@ const { Op } = require('sequelize');
 
 class RecipientController {
   async index(req, res) {
-    const { recipient, page } = req.query;
+    const { recipient, page, noLimit } = req.query;
 
-    const limit = 10;
-    const offset = (page - 1) * limit;
+    const limit = noLimit ? null : 10;
+    const offset = noLimit ? 0 : (page - 1) * limit;
 
     const response = await Recipient.findAll({
       where: { name: { [Op.like]: `%${recipient}%` }, deleted_at: null },
