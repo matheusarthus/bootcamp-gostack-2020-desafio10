@@ -16,8 +16,6 @@ export function* refreshOrders({ payload }) {
       },
     });
 
-    console.tron.log(response);
-
     yield put(refreshOrdersSuccess(response.data, page));
   } catch (err) {
     Alert.alert(

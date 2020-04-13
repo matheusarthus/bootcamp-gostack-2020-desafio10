@@ -14,10 +14,15 @@ const { Op } = require('sequelize');
 
 class OrderController {
   async index(req, res) {
-    const { product_name } = req.query;
+    const { product_name, page } = req.query;
+
+    const limit = 10;
+    const offset = (page - 1) * limit;
 
     const orders = await Order.findAll({
       where: { product: { [Op.like]: `%${product_name}%` } },
+      limit,
+      offset,
       order: ['created_at'],
       attributes: ['id', 'product', 'start_date', 'end_date', 'canceled_at'],
       include: [
