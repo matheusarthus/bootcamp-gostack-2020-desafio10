@@ -1,5 +1,6 @@
 import React from 'react';
 import { parseISO, format } from 'date-fns';
+import PropTypes from 'prop-types';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -85,3 +86,18 @@ export default function Order({ data, navigation }) {
     </Container>
   );
 }
+
+Order.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }).isRequired,
+  data: PropTypes.shape({
+    id: PropTypes.number,
+    start_date: PropTypes.string,
+    end_date: PropTypes.string,
+    createdAt: PropTypes.string,
+    recipient: PropTypes.shape({
+      cidade: PropTypes.string,
+    }),
+  }).isRequired,
+};

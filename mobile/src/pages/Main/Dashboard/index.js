@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RefreshControl } from 'react-native';
+import PropTypes from 'prop-types';
 
 import Header from './Header';
 import Order from './Order';
 
-import { Container, OrdersList } from './styles';
+import { Container, OrdersList, EmptyText } from './styles';
 
 import { refreshOrdersRequest } from '~/store/modules/user/actions';
 
@@ -13,6 +14,7 @@ export default function Dashboard({ navigation }) {
   const dispatch = useDispatch();
 
   const [viewMode, setViewMode] = useState('pending');
+  /* const [cache, setCache] = useState(0); */
 
   const [page, setPage] = useState(1);
 
@@ -44,22 +46,33 @@ export default function Dashboard({ navigation }) {
     <Container>
       <Header viewMode={viewMode} setViewMode={setViewMode} />
 
-      <OrdersList
-        data={cache}
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={refreshList}
-            colors={['#fff']}
-            progressBackgroundColor="#7d40e7"
-            size="large"
-          />
-        }
-        onEndReachedThreshold={0.1}
-        onEndReached={loadMore}
-        keyStractor={(item) => String(item.id)}
-        renderItem={({ item }) => <Order data={item} navigation={navigation} />}
-      />
+      {cache === null || Object.keys(cache).length > 0 ? (
+        <OrdersList
+          data={cache}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={refreshList}
+              colors={['#fff']}
+              progressBackgroundColor="#7d40e7"
+              size="large"
+            />
+          }
+          onEndReachedThreshold={0.1}
+          onEndReached={loadMore}
+          keyStractor={(item) => String(item.id)}
+          renderItem={({ item }) => (
+            <Order data={item} navigation={navigation} />
+          )}
+        />
+      ) : (
+        <EmptyText>Não há encomendas para serem listadas.</EmptyText>
+      )}
     </Container>
   );
 }
+
+Dashboard.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  navigation: PropTypes.object.isRequired,
+};

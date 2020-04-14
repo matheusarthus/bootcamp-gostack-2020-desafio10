@@ -31,7 +31,7 @@ export function* startOrder({ payload }) {
 
     yield call(api.put, `deliveryman/${deliveryman_id}/delivery/${order_id}`);
 
-    yield put(refreshOrdersRequest(deliveryman_id));
+    yield put(refreshOrdersRequest(deliveryman_id, 1));
 
     Alert.alert('Confirmação bem sucedida', 'Encomenda retirada com sucesso.');
 
@@ -60,7 +60,7 @@ export function* confirmOrder({ payload }) {
         'A confirmação da entrega foi realizada com sucesso!'
       );
 
-      yield put(refreshOrdersRequest(deliveryman_id));
+      yield put(refreshOrdersRequest(deliveryman_id, 1));
 
       RootNavigation.navigate('Dashboard');
     } catch (err) {

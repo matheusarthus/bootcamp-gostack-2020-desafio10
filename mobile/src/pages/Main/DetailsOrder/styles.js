@@ -168,7 +168,7 @@ export const ContainerButtons = styled.View`
 `;
 
 export const InfoProblemButton = styled.TouchableOpacity`
-  background: #f8f9fd;
+  background: ${(props) => (props.end_date ? '#00000000' : '#f8f9fd')};
   width: 33%;
   align-items: center;
   padding: 10px;

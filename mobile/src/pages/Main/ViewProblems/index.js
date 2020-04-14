@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Alert } from 'react-native';
 
 import Problem from './Problem';
@@ -7,7 +8,7 @@ import { Container, Background, Title, ProblemsList } from './styles';
 
 import api from '~/services/api';
 
-export default function ViewProblems({ navigation, route }) {
+export default function ViewProblems({ route }) {
   const { order_id } = route.params;
   const [problems, setProblems] = useState();
 
@@ -40,3 +41,11 @@ export default function ViewProblems({ navigation, route }) {
     </Container>
   );
 }
+
+ViewProblems.propTypes = {
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      order_id: PropTypes.number,
+    }),
+  }).isRequired,
+};

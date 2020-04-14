@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { RNCamera } from 'react-native-camera';
 
@@ -62,3 +63,11 @@ export default function ConfirmOrder({ route }) {
     </Container>
   );
 }
+
+ConfirmOrder.propTypes = {
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      order_id: PropTypes.number,
+    }),
+  }).isRequired,
+};

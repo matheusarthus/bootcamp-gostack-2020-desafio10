@@ -25,13 +25,11 @@ export default function Profile() {
   const user = useSelector((state) => state.user.user);
 
   function handleLogout() {
-    console.tron.log('SignOut');
-
     dispatch(signOut());
   }
 
   function dateFormatted(date) {
-    return format(parseISO(date), 'MM/dd/yyyy');
+    return format(parseISO(date), 'dd/MM/yyyy');
   }
 
   return (

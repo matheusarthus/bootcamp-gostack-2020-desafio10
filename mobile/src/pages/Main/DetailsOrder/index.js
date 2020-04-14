@@ -3,6 +3,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { parseISO, format } from 'date-fns';
+import PropTypes from 'prop-types';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -124,6 +125,8 @@ export default function DetailsOrder({ navigation, route }) {
             onPress={() => {
               navigation.navigate('SubmitProblem', { order_id: order.id });
             }}
+            end_date={order.end_date}
+            disabled={!!order.end_date}
           >
             <Icon name="highlight-off" size={20} color="#E74040" />
             <InfoProblem>Informar Problema</InfoProblem>
@@ -143,7 +146,7 @@ export default function DetailsOrder({ navigation, route }) {
                 : navigation.navigate('ConfirmOrder', { order_id: order.id });
             }}
             end_date={order.end_date}
-            disabled={order.end_date}
+            disabled={!!order.end_date}
           >
             <Icon
               name="check-circle"
@@ -169,3 +172,28 @@ export default function DetailsOrder({ navigation, route }) {
     </Container>
   );
 }
+
+DetailsOrder.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }).isRequired,
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      data: PropTypes.shape({
+        id: PropTypes.number,
+        deliveryman_id: PropTypes.number,
+        product: PropTypes.string,
+        start_date: PropTypes.string,
+        end_date: PropTypes.string,
+        recipient: PropTypes.shape({
+          name: PropTypes.string,
+          logradouro: PropTypes.string,
+          numero: PropTypes.number,
+          cidade: PropTypes.string,
+          estado: PropTypes.string,
+          cep: PropTypes.number,
+        }),
+      }),
+    }),
+  }).isRequired,
+};

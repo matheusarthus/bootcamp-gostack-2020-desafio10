@@ -10,3 +10,9 @@ export const OrdersList = styled.FlatList.attrs({
   margin-top: 110px;
   padding: 0 12px;
 `;
+
+export const EmptyText = styled.Text`
+  margin-top: 150px;
+  align-self: center;
+  color: #999;
+`;

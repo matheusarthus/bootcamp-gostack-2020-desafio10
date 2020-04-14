@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Alert } from 'react-native';
+import PropTypes from 'prop-types';
 
 import { Container, Background, Form, Input, SubmitButton } from './styles';
 
@@ -48,3 +49,14 @@ export default function SubmitProplem({ navigation, route }) {
     </Container>
   );
 }
+
+SubmitProplem.propTypes = {
+  navigation: PropTypes.shape({
+    goBack: PropTypes.func,
+  }).isRequired,
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      order_id: PropTypes.number,
+    }),
+  }).isRequired,
+};
