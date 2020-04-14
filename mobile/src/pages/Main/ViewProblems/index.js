@@ -4,7 +4,13 @@ import { Alert } from 'react-native';
 
 import Problem from './Problem';
 
-import { Container, Background, Title, ProblemsList } from './styles';
+import {
+  Container,
+  Background,
+  Title,
+  ProblemsList,
+  EmptyText,
+} from './styles';
 
 import api from '~/services/api';
 
@@ -33,11 +39,15 @@ export default function ViewProblems({ route }) {
     <Container>
       <Background />
       <Title>Encomenda {order_id}</Title>
-      <ProblemsList
-        data={problems}
-        keyStractor={(item) => String(item.id)}
-        renderItem={({ item }) => <Problem data={item} />}
-      />
+      {!problems || Object.keys(problems).length === 0 ? (
+        <EmptyText>Não há problemas para serem listados.</EmptyText>
+      ) : (
+        <ProblemsList
+          data={problems}
+          keyStractor={(item) => String(item.id)}
+          renderItem={({ item }) => <Problem data={item} />}
+        />
+      )}
     </Container>
   );
 }

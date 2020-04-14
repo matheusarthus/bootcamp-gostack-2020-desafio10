@@ -46,7 +46,9 @@ export default function Dashboard({ navigation }) {
     <Container>
       <Header viewMode={viewMode} setViewMode={setViewMode} />
 
-      {cache === null || Object.keys(cache).length > 0 ? (
+      {cache === null || Object.keys(cache).length === 0 ? (
+        <EmptyText>Não há encomendas para serem listadas.</EmptyText>
+      ) : (
         <OrdersList
           data={cache}
           refreshControl={
@@ -65,8 +67,6 @@ export default function Dashboard({ navigation }) {
             <Order data={item} navigation={navigation} />
           )}
         />
-      ) : (
-        <EmptyText>Não há encomendas para serem listadas.</EmptyText>
       )}
     </Container>
   );

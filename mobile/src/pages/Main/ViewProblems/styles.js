@@ -26,3 +26,8 @@ export const ProblemsList = styled.FlatList.attrs({
   top: -55px;
   width: 335px;
 `;
+
+export const EmptyText = styled.Text`
+  top: 20px;
+  color: #999;
+`;
