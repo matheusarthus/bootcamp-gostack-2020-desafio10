@@ -88,6 +88,10 @@ class DeliverymanFunctionsController {
       description: req.body.description,
     });
 
+    order.hasProblem = true;
+
+    await order.save();
+
     return res.json(problem);
   }
 }

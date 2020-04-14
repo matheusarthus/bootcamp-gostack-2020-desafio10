@@ -4,23 +4,29 @@ import Order from '../models/Order';
 import Recipient from '../models/Recipient';
 import Deliveryman from '../models/Deliveryman';
 import File from '../models/File';
+import Problem from '../models/Problem';
 
 import SolicitationMail from '../jobs/SolicitationMail';
 import UpdatingMail from '../jobs/UpdatingMail';
 import CancellationMail from '../jobs/CancellationMail';
 import Queue from '../../lib/Queue';
 
-const { Op } = require('sequelize');
+const Sequelize = require('sequelize');
+
+const { Op } = Sequelize;
 
 class OrderController {
   async index(req, res) {
-    const { product_name, page } = req.query;
+    const { product_name, page, problem } = req.query;
 
     const limit = 10;
     const offset = (page - 1) * limit;
 
     const orders = await Order.findAll({
-      where: { product: { [Op.like]: `%${product_name}%` } },
+      where: {
+        product: { [Op.like]: `%${product_name}%` },
+        has_problem: problem ? true : { [Op.or]: [true, false] },
+      },
       limit,
       offset,
       order: ['created_at'],
@@ -29,7 +35,7 @@ class OrderController {
         {
           model: File,
           as: 'signature',
-          attirbutes: ['id', 'path', 'url'],
+          attributes: ['id', 'path', 'url'],
         },
         {
           model: Recipient,

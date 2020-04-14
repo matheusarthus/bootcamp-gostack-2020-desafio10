@@ -8,6 +8,7 @@ class Order extends Model {
         canceled_at: Sequelize.DATE,
         start_date: Sequelize.DATE,
         end_date: Sequelize.DATE,
+        hasProblem: Sequelize.BOOLEAN,
       },
       {
         sequelize,
